@@ -68,6 +68,10 @@ public class Main {
 		args[0] = args[0].replaceAll("\\s","");
 
 
+        // Create the calculator and evaluate the expression string input.
+        Calculator calculator = new Calculator();
+        calculator.setExpressionInput(args[0]);
+
 		logHandle.info("Exiting Main");
 	}
 
