@@ -50,7 +50,7 @@ public class Main {
 
 		initializeLogging();
 
-		logHandle.info("Entering Main");
+		logHandle.trace("Entering " + Thread.currentThread().getStackTrace()[1].getMethodName());
 
 		// If there are fewer than 1 arguments then 
 		// flash the error and example usage.
@@ -72,7 +72,7 @@ public class Main {
         Calculator calculator = new Calculator();
         calculator.setExpressionInput(args[0]);
 
-		logHandle.info("Exiting Main");
+        logHandle.trace("Exiting " + Thread.currentThread().getStackTrace()[1].getMethodName());
 	}
 
 	// Initialize the logging properties using
@@ -88,7 +88,7 @@ public class Main {
 
 			PropertyConfigurator.configure(logProperties);
 			//set the level to debug
-			Logger.getRootLogger().setLevel(Level.INFO);
+			Logger.getRootLogger().setLevel(Level.ALL);
 		}
 		catch(Exception e) {
 			e.printStackTrace();
