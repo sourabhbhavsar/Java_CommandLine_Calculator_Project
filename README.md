@@ -36,6 +36,8 @@ An expression needs to be passed to the program in the form of a command line pa
 - Sample 5 "let(a, 5, let(b, mult(a, 10), add(b, a)))"	 =>  55
 - Sample 6 "let(a, let(b, 10, add(b, b)), let(b, 20, add(a, b))"  =>  40	
 
+## JUnit Test Cases
+The project contains unit test cases for the provided 6 sample inputs and outputs and the class CalculatorTestSute implements the 6 jUnit test case located in the SRC/TEST/JAVA folder of the project under the test package.
 
 ## Assumptions
 - Identifiers created in the let command can only be between a to z (small case). This gives total 26 variables at the maximum.
