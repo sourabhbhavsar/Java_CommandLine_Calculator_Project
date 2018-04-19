@@ -3,4 +3,4 @@ jdk:
  - oraclejdk8
 script: mvn -f CalculatorProject/pom.xml test
 after_success:
-  - mvn -f CalculatorProject/pom.xml clean test jacoco:report coveralls:report
+  - mvn -f CalculatorProject/pom.xml clean test org.jacoco:jacoco-maven-plugin:report coveralls:report
