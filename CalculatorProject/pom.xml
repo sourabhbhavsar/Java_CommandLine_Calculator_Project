@@ -19,7 +19,7 @@
 		<!-- PLUGINS FOR MANAGING PLUGINS -->
 		<pluginManagement>
 			<plugins>
-
+ 
 				<plugin>
 					<!-- Used to get eclipse to ignore the jacoco part of the build process 
 						when it builds the project internally. jacoco is only used if you run through 
