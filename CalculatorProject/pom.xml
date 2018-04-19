@@ -19,7 +19,7 @@
 		<!-- PLUGINS FOR MANAGING PLUGINS -->
 		<pluginManagement>
 			<plugins>
- 
+
 				<plugin>
 					<!-- Used to get eclipse to ignore the jacoco part of the build process 
 						when it builds the project internally. jacoco is only used if you run through 
@@ -50,20 +50,20 @@
 			</plugins>
 		</pluginManagement>
 
-
-
 		<plugins>
-			<plugin>
-				<groupId>org.eluder.coveralls</groupId>
-				<artifactId>coveralls-maven-plugin</artifactId>
-				<version>3.1.0</version>
-			</plugin>
-
+			
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-report-plugin</artifactId>
 				<version>2.18.1</version>
 			</plugin>
+			
+			<plugin>
+				<groupId>org.eluder.coveralls</groupId>
+				<artifactId>coveralls-maven-plugin</artifactId>
+				<version>3.1.0</version>
+			</plugin>
+			
 			<!-- CODE COVERAGE PUBLISHER -->
 			<plugin>
 				<groupId>org.eluder.coveralls</groupId>
@@ -104,7 +104,6 @@
 	</reporting>
 
 	<dependencies>
-
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
