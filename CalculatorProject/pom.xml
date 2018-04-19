@@ -15,6 +15,43 @@
 				</includes>
 			</resource>
 		</resources>
+
+		<!-- PLUGINS FOR MANAGING PLUGINS -->
+		<pluginManagement>
+			<plugins>
+
+				<plugin>
+					<!-- Used to get eclipse to ignore the jacoco part of the build process 
+						when it builds the project internally. jacoco is only used if you run through 
+						an external maven client, which prevents it being run on every save. -->
+					<groupId>org.eclipse.m2e</groupId>
+					<artifactId>lifecycle-mapping</artifactId>
+					<version>1.0.0</version>
+					<configuration>
+						<lifecycleMappingMetadata>
+							<pluginExecutions>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>org.jacoco</groupId>
+										<artifactId>jacoco-maven-plugin</artifactId>
+										<versionRange>[0.0.1,)</versionRange>
+										<goals>
+											<goal>prepare-agent</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore />
+									</action>
+								</pluginExecution>
+							</pluginExecutions>
+						</lifecycleMappingMetadata>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+
+
+
 		<plugins>
 			<plugin>
 				<groupId>org.eluder.coveralls</groupId>
