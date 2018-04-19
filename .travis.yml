@@ -1,6 +1,6 @@
 language: java
 jdk:
  - oraclejdk8
-script: mvn -f CalculatorProject/pom.xml cobertura:cobertura
+script: mvn -f CalculatorProject/pom.xml jacoco:report coveralls:report
 after_success:
   - bash <(curl -s https://codecov.io/bash)
