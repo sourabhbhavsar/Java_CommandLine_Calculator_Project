@@ -35,3 +35,6 @@ An expression needs to be passed to the program in the form of a command line pa
 
 ## Assumptions
 - Identifiers created in the let command can only be between a to z (small case). This gives total 26 variables at the maximum.
+- It performs a cases insensitive calculation of expression. A and a are considered to be same variables.
+
+
