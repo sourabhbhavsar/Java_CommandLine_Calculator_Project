@@ -61,6 +61,36 @@ public class Calculator {
 		this.expressionInput = expressionInput;
 	}
 
+	// The main function that is responsible for evaluating an expression.
+	public long evaluate() {
+		logHandle.info("Entering evaluate method");
+
+		// Validate the command line paramenters
+		if(expressionInput == null || expressionInput.isEmpty()) {
+			logHandle.error("Incorect usage! No Command line arguements were passed.");
+			System.out.println("Incorrect Usage. No Command line arguements were passed");
+			System.out.println("Example Usage : ");
+			System.out.println("Java Calculator.Main \"add(1,2)\"");
+			System.out.println("OR");
+			System.out.println("Java Calculator.Main \"let(a, 5, add(a, a))\"");
+			System.exit(0);
+		}
+
+
+		//split the expression input string to extract tokens
+		tokens = expressionInput.split("[\\W]+");
+		identifiers = new long[26];
+
+		logHandle.info("Extracted the tokens[]: " + (Arrays.toString(tokens)));
+		// process the extracted tokens and return the answer.
+		answer = processToken();
+
+		logHandle.info("Answer: " + answer);
+		return answer;
+	}
+
+
+
 
 	// Method to process tokens
 	// the add token should perform addition
@@ -71,11 +101,11 @@ public class Calculator {
 	private long processToken() {
 
 		logHandle.trace("Entering " + Thread.currentThread().getStackTrace()[1].getMethodName());
-		
+
 		long value = 0;
 		String tokenStr = tokens[pos];
 
-		
+
 		if (tokenStr.equalsIgnoreCase("add"))
 		{
 			logHandle.info("Encountered Add");
@@ -122,7 +152,7 @@ public class Calculator {
 		}
 
 		logHandle.trace("Exiting " + Thread.currentThread().getStackTrace()[1].getMethodName());
-		
+
 		return value;
 	}
 
@@ -132,7 +162,7 @@ public class Calculator {
 	private long performAdd() {
 
 		logHandle.trace("Entering " + Thread.currentThread().getStackTrace()[1].getMethodName());
-		
+
 		// Extracting the operands for the add operation
 		// by incrementing the position pos.
 		pos++;
@@ -144,9 +174,9 @@ public class Calculator {
 		long value = v1 + v2;
 
 		logHandle.info("Evaluated Add resulting in the value: " + value);
-		
+
 		logHandle.trace("Exiting " + Thread.currentThread().getStackTrace()[1].getMethodName());
-		
+
 		return value;
 	}
 
@@ -155,7 +185,7 @@ public class Calculator {
 	private long performSub() {
 
 		logHandle.trace("Entering " + Thread.currentThread().getStackTrace()[1].getMethodName());
-		
+
 		// Extracting the operands for the subtraction operation
 		// by incrementing the position pos.    	
 		pos++;
@@ -165,9 +195,9 @@ public class Calculator {
 		long value = v1 - v2;
 
 		logHandle.info("Evaluated Sub resulting in the value: " + value);
-		
+
 		logHandle.trace("Exiting " + Thread.currentThread().getStackTrace()[1].getMethodName());
-		
+
 		return value;
 	}
 
@@ -177,7 +207,7 @@ public class Calculator {
 	private long performMult() {
 
 		logHandle.trace("Entering " + Thread.currentThread().getStackTrace()[1].getMethodName());
-		
+
 		// Extracting the operands for the mult operation
 		// by incrementing the position pos.
 		pos++;
@@ -187,9 +217,9 @@ public class Calculator {
 		long value = v1 * v2;
 
 		logHandle.info("Evaluated Mult resulting in the value: " + value);
-		
+
 		logHandle.trace("Exiting " + Thread.currentThread().getStackTrace()[1].getMethodName());
-		
+
 		return value;
 	}
 
@@ -199,7 +229,7 @@ public class Calculator {
 	private long performDiv() {
 
 		logHandle.trace("Entering " + Thread.currentThread().getStackTrace()[1].getMethodName());
-		
+
 		// Extracting the operands for the division operation
 		// by incrementing the position pos.
 		pos++;
@@ -209,9 +239,9 @@ public class Calculator {
 		long value = v1 / v2;
 
 		logHandle.info("Evaluated Mult resulting in the value: " + value);
-		
+
 		logHandle.trace("Exiting " + Thread.currentThread().getStackTrace()[1].getMethodName());
-		
+
 		return value;
 	}
 
@@ -219,7 +249,7 @@ public class Calculator {
 	private long performLet() {
 
 		logHandle.trace("Entering " + Thread.currentThread().getStackTrace()[1].getMethodName());
-		
+
 		// Extracting the operands for the let operation
 		// by incrementing the position pos.
 		pos++;
@@ -229,9 +259,9 @@ public class Calculator {
 		long value = processToken();
 
 		logHandle.info("Evaluated Mult resulting in the value: " + value);
-		
+
 		logHandle.trace("Exiting " + Thread.currentThread().getStackTrace()[1].getMethodName());
-		
+
 		return value;
 	}
 

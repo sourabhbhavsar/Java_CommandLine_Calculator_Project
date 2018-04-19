@@ -68,11 +68,16 @@ public class Main {
 		args[0] = args[0].replaceAll("\\s","");
 
 
-        // Create the calculator and evaluate the expression string input.
-        Calculator calculator = new Calculator();
-        calculator.setExpressionInput(args[0]);
+		// Create the calculator and evaluate the expression string input.
+		Calculator calculator = new Calculator();
+		calculator.setExpressionInput(args[0]);
 
-        logHandle.trace("Exiting " + Thread.currentThread().getStackTrace()[1].getMethodName());
+		// Evaluate the expression string
+		long result = calculator.evaluate();
+		System.out.println(result);
+		logHandle.info("Calculated value: " + result);
+
+		logHandle.trace("Exiting " + Thread.currentThread().getStackTrace()[1].getMethodName());
 	}
 
 	// Initialize the logging properties using
