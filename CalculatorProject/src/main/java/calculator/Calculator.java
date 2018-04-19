@@ -27,55 +27,227 @@ import java.util.Properties;
  */
 public class Calculator {
 
-	 // The log handle which can be used to print log messages at
-		// different level like INFO, ERROR and DEBUG
-		final static Logger logHandle = Logger.getLogger(Calculator.class);
+	// The log handle which can be used to print log messages at
+	// different level like INFO, ERROR and DEBUG
+	final static Logger logHandle = Logger.getLogger(Calculator.class);
 
-	    //ExpressionInput would store the input expression passed over the command line.
-	    private String expressionInput;
-	
-	 // Default Constructor
-	    public Calculator() {    	
-	        initializeLogHandle();
-	        logHandle.info("Initializing Calculator");
-	    }
-	    
+	//ExpressionInput would store the input expression passed over the command line.
+	private String expressionInput;
 
-	    // Initialize the log handler to be able to use logging 
-	    private void initializeLogHandle() {
-	    	FileInputStream fis = null;
-	    	try {
-	            Properties logProperties = new Properties();
-	            fis = new FileInputStream("src/main/resources/log4j.properties");
-	            logProperties.load(fis);
-	            
-	            PropertyConfigurator.configure(logProperties);
-	            //set the level to debug
-	            Logger.getRootLogger().setLevel(Level.DEBUG);
-	        }
-	        catch(Exception e) {
-	            e.printStackTrace();
-	            System.out.println("Encountered a problem in initializing the Logger.");
-	        }
-	        finally
-	        {
-	        	try {
-					fis.close();
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-					System.out.println("Encountered a problem in closing the input stream.");
-				}
-	        }
-	    }
+	// tokens will contains individual lexems after parsing the input expression
+	private String[] tokens;
+	// to store the ans of the evaluation of expression.
+	private long answer;
+	//pos will keep track of the index of the current token to be processed.
+	private int pos;
 
 
-		public String getExpressionInput() {
-			return expressionInput;
+	// let command will let the calculator create identifiers and 
+	// this array will hold their evaluated values.
+	private long[] identifiers;
+
+	// Default Constructor
+	public Calculator() {    	
+		initializeLogHandle();
+		logHandle.info("Initializing Calculator");
+	}
+
+	public String getExpressionInput() {
+		return expressionInput;
+	}
+
+
+	public void setExpressionInput(String expressionInput) {
+		this.expressionInput = expressionInput;
+	}
+
+
+	// Method to process tokens
+	// the add token should perform addition
+	// the mult token should perform multiplication
+	// the sub token should perform substraction
+	// the div token should perform divsion
+	// the let token should assign values to variables
+	private long processToken() {
+
+		long value = 0;
+		String tokenStr = tokens[pos];
+
+		if (tokenStr.equalsIgnoreCase("add"))
+		{
+			logHandle.info("Encountered Add");
+			value = performAdd();
+		}
+		else if (tokenStr.equalsIgnoreCase("mult"))
+		{
+			logHandle.info("Encountered Mult");
+			value = performMult();
+		}
+		else if (tokenStr.equalsIgnoreCase("sub"))
+		{
+			logHandle.info("Encountered sub");
+			value = performSub();
+		}
+		else if (tokenStr.equalsIgnoreCase("div"))
+		{
+			logHandle.info("Encountered Div");
+			value = performDiv();
+		}
+		else if (tokenStr.equalsIgnoreCase("let"))
+		{
+			logHandle.info("Encountered Let");
+			value = performLet();
+			pos++;
+			value = processToken();
+		}
+		// this should not happen
+		else 
+		{
+			char ch = tokenStr.charAt(0);
+			// test if this identifier is already evaluated and if thst is the case
+			// we can safely return it
+			if(tokens[pos].length() == 1 && (ch >= 'a' && ch <= 'z')) {
+				logHandle.info("Encountered preset value: " + identifiers[ch - 97]);
+				return identifiers[ch - 97];
+			}
+			else {
+				// This means we have found a literal value
+				logHandle.info("Encountered Literal number " + tokens[pos]);
+
+				value = Long.parseLong(tokens[pos]);
+			}
 		}
 
+		return value;
+	}
 
-		public void setExpressionInput(String expressionInput) {
-			this.expressionInput = expressionInput;
+
+	// adds the two tokens by fetching their value from teh array of tokens by
+	// incrementing the position pos
+	private long performAdd() {
+
+		// Extracting the operands for the add operation
+		// by incrementing the position pos.
+		pos++;
+		long v1 = processToken();
+		pos++;
+		long v2 = processToken();
+
+		// Perform the addition.
+		long value = v1 + v2;
+
+		logHandle.info("Evaluated Add resulting in the value: " + value);
+		return value;
+	}
+
+	// subtracts the two tokens by fetching their value from the array of tokens by
+	// incrementing the position pos
+	private long performSub() {
+
+		// Extracting the operands for the subtraction operation
+		// by incrementing the position pos.    	
+		pos++;
+		long v1 = processToken();
+		pos++;
+		long v2 = processToken();
+		long value = v1 - v2;
+
+		logHandle.info("Evaluated Sub resulting in the value: " + value);
+		return value;
+	}
+
+
+	// Multiply the two tokens by fetching their value from the array of tokens by
+	// incrementing the position pos
+	private long performMult() {
+
+		// Extracting the operands for the mult operation
+		// by incrementing the position pos.
+		pos++;
+		long v1 = processToken();
+		pos++;
+		long v2 = processToken();
+		long value = v1 * v2;
+
+		logHandle.info("Evaluated Mult resulting in the value: " + value);
+		return value;
+	}
+
+
+	// Divide the two tokens by fetching their value from teh array of tokens by
+	// incrementing the position pos
+	private long performDiv() {
+
+		// Extracting the operands for the division operation
+		// by incrementing the position pos.
+		pos++;
+		long v1 = processToken();
+		pos++;
+		long v2 = processToken();
+		long value = v1 / v2;
+
+		logHandle.info("Evaluated Mult resulting in the value: " + value);
+		return value;
+	}
+
+	// performLet method lets the calculator assign value to an identifier.
+	private long performLet() {
+
+		// Extracting the operands for the let operation
+		// by incrementing the position pos.
+		pos++;
+		char val = tokens[pos].charAt(0);
+		pos++;
+		identifiers[val-97] = processToken();
+		long value = processToken();
+
+		logHandle.info("Evaluated Mult resulting in the value: " + value);
+		return value;
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	// Initialize the log handler to be able to use logging 
+	private void initializeLogHandle() {
+		FileInputStream fis = null;
+		try {
+			Properties logProperties = new Properties();
+			fis = new FileInputStream("src/main/resources/log4j.properties");
+			logProperties.load(fis);
+
+			PropertyConfigurator.configure(logProperties);
+			//set the level to debug
+			Logger.getRootLogger().setLevel(Level.DEBUG);
 		}
+		catch(Exception e) {
+			e.printStackTrace();
+			System.out.println("Encountered a problem in initializing the Logger.");
+		}
+		finally
+		{
+			try {
+				fis.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				System.out.println("Encountered a problem in closing the input stream.");
+			}
+		}
+	}
+
+
+
 }
