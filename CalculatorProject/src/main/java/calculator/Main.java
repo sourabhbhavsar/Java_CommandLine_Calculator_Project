@@ -30,47 +30,77 @@ public class Main {
 	// different level like INFO, ERROR and DEBUG
 	final static Logger logHandle = Logger.getLogger(Main.class);
 
+	// Utility function to print the usage for the program.
+	public static void printUsage()
+	{
+		System.out.println("********************************************************");
+		System.out.println("Example Usage : ");
+		System.out.println("Java Calculator.Main \"add(1,2)\"");
+		System.out.println("OR");
+		System.out.println("Java Calculator.Main \"let(a, 5, add(a, a))\"");
+		System.out.println("********************************************************");
+	}
+
+	// The main driver of the program
+	// evaluates the passed expression with the
+	// help of calculator.
+
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
 		initializeLogging();
-        
-        logHandle.info("Entering Main");
-        
-		System.out.println("Hello");
-		
+
+		logHandle.info("Entering Main");
+
+		// If there are fewer than 1 arguments then 
+		// flash the error and example usage.
+		if(args.length < 1) 
+		{        	
+			logHandle.error("Incorect usage! No Command line arguements were passed.");
+			System.out.println("Error: Incorrect Usage. No Command line arguements were passed");
+			printUsage();
+			System.exit(0);
+		}
+
+		logHandle.info("Received Command Line Arguments: " + args[0]);
+
+		// Eliminate the whitespace from the expression.
+		args[0] = args[0].replaceAll("\\s","");
+
+
 		logHandle.info("Exiting Main");
 	}
-	
+
 	// Initialize the logging properties using
-    // the property file from the resource folder.
-    private static void initializeLogging() {
-        
-    	FileInputStream fis = null;
-    	try 
-    	{
-            Properties logProperties = new Properties();
-            fis = new FileInputStream("src/main/resources/log4j.properties");
-            logProperties.load(fis);
-            
-            PropertyConfigurator.configure(logProperties);
-            //set the level to debug
-            Logger.getRootLogger().setLevel(Level.INFO);
-        }
-        catch(Exception e) {
-            e.printStackTrace();
-            System.out.println("Encountered a problem in initializing the Logger.");
-        }
-    	finally
-    	{
-    		try {
+	// the property file from the resource folder.
+	private static void initializeLogging() {
+
+		FileInputStream fis = null;
+		try 
+		{
+			Properties logProperties = new Properties();
+			fis = new FileInputStream("src/main/resources/log4j.properties");
+			logProperties.load(fis);
+
+			PropertyConfigurator.configure(logProperties);
+			//set the level to debug
+			Logger.getRootLogger().setLevel(Level.INFO);
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+			System.out.println("Encountered a problem in initializing the Logger.");
+		}
+		finally
+		{
+			try {
 				fis.close();
-			} catch (IOException e) {
+			} catch (IOException e) 
+			{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 				System.out.println("Encountered a problem in closing the input stream.");
 			}
-    	}
-    }
+		}
+	}
 
 }
