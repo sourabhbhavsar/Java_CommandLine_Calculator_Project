@@ -1,0 +1,6 @@
+language: java
+jdk:
+ - oraclejdk8
+script: mvn -f CalculatorProject/pom.xml test
+after_success:
+  - mvn -f CalculatorProject/pom.xml clean test jacoco:report coveralls:report
