@@ -61,6 +61,12 @@ public class Calculator {
 		this.expressionInput = expressionInput;
 	}
 
+	public void convertIdentifiersToSmallCase()
+	{
+		
+	}
+	
+	
 	// The main function that is responsible for evaluating an expression.
 	public long evaluate() {
 		logHandle.info("Entering evaluate method");
