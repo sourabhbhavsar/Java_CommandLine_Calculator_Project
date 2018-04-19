@@ -1,6 +1,6 @@
 language: java
 jdk:
  - oraclejdk8
-script: mvn -f CalculatorProject/pom.xml test
+script: mvn -f CalculatorProject/pom.xml cobertura:cobertura
 after_success:
   - mvn -f CalculatorProject/pom.xml clean test org.jacoco:jacoco-maven-plugin:report coveralls:report
