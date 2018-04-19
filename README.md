@@ -40,5 +40,17 @@ An expression needs to be passed to the program in the form of a command line pa
 ## Assumptions
 - Identifiers created in the let command can only be between a to z (small case). This gives total 26 variables at the maximum.
 - It performs a cases insensitive calculation of expression. A and a are considered to be same variables.
+- All the operations like Add, sub etc would be first converted to small case and then processed and hence it perfroms a case insensitive operation.
+
+## Logging Level
+The program is integrated with log4j and can log different level of loggings like:
+- TRACE
+- ERROR
+- INFO
+- WARN
+- DEBUG
+
+## Continuos Integration:
+The repository is linked with Travis CI and can build automatically with push and commit to repositories and it's build status is shown at the top of the readMe file.
 
 
