@@ -3,4 +3,4 @@ jdk:
  - oraclejdk8
 script: mvn -f CalculatorProject/pom.xml cobertura:cobertura
 after_success:
-  - mvn -f CalculatorProject/pom.xml clean test org.jacoco:jacoco-maven-plugin:report coveralls:report
+  - bash <(curl -s https://codecov.io/bash)
