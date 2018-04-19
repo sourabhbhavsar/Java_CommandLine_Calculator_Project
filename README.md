@@ -1,3 +1,7 @@
+
+[![Build Status](https://travis-ci.org/sourabhbhavsar/synopsys_project.svg?branch=master)](https://travis-ci.org/sourabhbhavsar/synopsys_project)
+
+
 # synopsys_project
 **Java Candidate Homework**:
 
