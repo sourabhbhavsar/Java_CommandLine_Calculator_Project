@@ -2,8 +2,7 @@
 [![Build Status](https://travis-ci.org/sourabhbhavsar/synopsys_project.svg?branch=master)](https://travis-ci.org/sourabhbhavsar/synopsys_project)
 
 
-# synopsys_project
-**Java Candidate Homework**:
+# Java_CommandLine_Calculator_Project
 
 ## Functional Requirements
 Write a calculator program in Java that evaluates expressions in a very simple integer expression language. The program takes an input on the command line, computes the result, and prints it to the console.
