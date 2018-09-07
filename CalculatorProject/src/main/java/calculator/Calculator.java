@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.Properties;
           
-tt
+
 /**
  * The following class will simulate the functioning of a command line calculator
  * Expressions can be passed through the command line arguments and the calculator
