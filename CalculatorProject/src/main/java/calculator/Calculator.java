@@ -8,7 +8,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Properties;
-
+          
 
 /**
  * The following class will simulate the functioning of a command line calculator
